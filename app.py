@@ -6,8 +6,7 @@ import tempfile
 # Load the Whisper model
 @st.cache_resource
 def load_model():
-    return whisper.load_model("large")
-
+    return whisper.load_model("small")
 model = load_model()
 
 # Streamlit app title and description
