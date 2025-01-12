@@ -1,6 +1,5 @@
 import streamlit as st
 import whisper
-import moviepy.editor as mp
 import os
 import tempfile
 
@@ -12,25 +11,17 @@ def load_model():
 model = load_model()
 
 # Streamlit app title and description
-st.title("Audio/Video Transcription & Translation")
-st.write("Upload a video or audio file, and choose to transcribe or translate it using Whisper large model.")
+st.title("Audio Transcription & Translation")
+st.write("Upload an audio file, and choose to transcribe or translate it using Whisper large model.")
 
-# File uploader
-uploaded_file = st.file_uploader("Upload your audio or video file", type=["mp4", "mp3", "wav", "m4a"])
+# File uploader for audio files only
+uploaded_file = st.file_uploader("Upload your audio file", type=["mp3", "wav", "m4a"])
 
 if uploaded_file:
     # Save the uploaded file to a temporary location
     with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(uploaded_file.name)[-1]) as temp_file:
         temp_file.write(uploaded_file.read())
         temp_file_path = temp_file.name
-
-    # Convert video to audio if needed
-    if uploaded_file.name.endswith(".mp4"):
-        st.info("Extracting audio from video...")
-        video = mp.VideoFileClip(temp_file_path)
-        audio_path = temp_file_path.replace(".mp4", ".mp3")
-        video.audio.write_audiofile(audio_path)
-        temp_file_path = audio_path
 
     # Option to transcribe or translate
     option = st.radio("Choose an option", ["Transcribe", "Translate"])
