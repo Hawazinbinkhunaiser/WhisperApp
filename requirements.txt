@@ -1,4 +1,7 @@
 streamlit
 openai-whisper
 moviepy
-torch 
+torch
+torchvision
+torchaudio
+ffmpeg
