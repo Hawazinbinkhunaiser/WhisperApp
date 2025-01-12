@@ -1,7 +1,5 @@
 streamlit
 openai-whisper
-moviepy
 torch
-torchvision
 torchaudio
-ffmpeg
+torchvision
